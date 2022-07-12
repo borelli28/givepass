@@ -9,10 +9,6 @@ print(f'master key: {master_key}')
 options = input('(R)Read Password - (W)Write Password - (A)Read All Accounts:  ').capitalize()
 print(f'user wants to: {options}')
 
-# TODO: Read all accounts
-# TODO: Check for already existing account in write_passwd()
-# TODO: Add email or username to account in write_passwd
-
 def create_file(key):
     with open('temp.txt', 'a') as passwd:
         # encrypt file
@@ -130,3 +126,7 @@ else:
 #     delete_temp_file()
 #
 # read_encrypted_file(master_key)
+
+# TODO: Read all accounts
+# TODO: Check for already existing account in write_passwd()
+# TODO: Add email or username to account in write_passwd
