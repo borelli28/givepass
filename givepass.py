@@ -16,7 +16,6 @@ def delete_temp_file():
 
     except:
         print('Error found in delete_temp_file()')
-        sys.exit()
 
 def create_file(key):
     try:
@@ -27,7 +26,6 @@ def create_file(key):
             delete_temp_file()
     except:
         print('Error found in create_file()')
-        sys.exit()
 
 def check_master_key(key):
     try:
@@ -37,7 +35,6 @@ def check_master_key(key):
     except:
         print('WRONG! Try again bozo')
         delete_temp_file()
-        sys.exit()
 
 # checks if passwd.txt.aes file exist, else we need to create a new one
 try:
@@ -47,7 +44,6 @@ try:
         create_file(master_key)
 except:
     print('Error found while checking if passwd.txt.aes file exist')
-    sys.exit()
 
 # Options presented to user
 options = input('(R)Read Credentials - (W)Write Credentials - (D)Display All Accounts - (!)Hard Reset: ').capitalize()
@@ -59,11 +55,9 @@ def check_input_valid(input):
         else:
             print('Invalid Input')
             delete_temp_file()
-            sys.exit()
     except:
         print('Error found in check_input_valid')
         delete_temp_file()
-        sys.exit()
 
 def read_passwd(key, account):
 
@@ -89,7 +83,6 @@ def read_passwd(key, account):
         return password
     except:
         print('Error found in read_passwd()')
-        sys.exit()
 
 def write_passwd(key, account, username, password):
 
@@ -105,7 +98,6 @@ def write_passwd(key, account, username, password):
                 print(i)
                 if i == account:
                     print('Account with that name already exist! Please enter a different account')
-                    sys.exit()
 
         # decrypt file
         pyAesCrypt.decryptFile("passwd.txt.aes", "temp.txt", master_key)
@@ -119,7 +111,6 @@ def write_passwd(key, account, username, password):
 
     except:
         print('Error found in write_passwd()')
-        sys.exit()
 
 def read_all_accounts(key):
 
@@ -146,7 +137,6 @@ def read_all_accounts(key):
 
     except:
         print('Error found in read_all_accounts()')
-        sys.exit()
 
 def hard_reset():
     try:
@@ -161,7 +151,6 @@ def hard_reset():
             delete_temp_file()
     except:
         print('Error found in hard_reset()')
-        sys.exit()
 
 # if passwd file does not exist, create one
 try:
@@ -196,7 +185,6 @@ elif options == '!':
 
 else:
     print('You entered a invalid option')
-    sys.exit()
 
 # Read entire passwd.txt.aes document. Used for debugging
 def read_encrypted_file(key):
@@ -215,6 +203,5 @@ def read_encrypted_file(key):
         delete_temp_file()
     except:
         print('Error found in read_encrypted_file()')
-        sys.exit()
 
 # read_encrypted_file(master_key)
