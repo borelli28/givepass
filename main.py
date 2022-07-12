@@ -14,9 +14,7 @@ def delete_temp_file():
     try:
         if os.path.exists('temp.txt'):
           os.remove('temp.txt')
-          print('temp file removed')
-        else:
-          print('temp file does not exist')
+
     except:
         print('Error found in delete_temp_file()')
         sys.exit()
@@ -26,7 +24,6 @@ def create_file(key):
         with open('temp.txt', 'a') as passwd:
             # encrypt file
             pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
-            print(f'encrypted passwd created: {passwd}')
 
             delete_temp_file()
     except:
@@ -55,7 +52,6 @@ except:
 
 # give password or enter password
 options = input('(R)Read Password - (W)Write Password - (A)Read All Accounts - (!)Hard Reset: ').capitalize()
-print(f'Option selected: {options}')
 
 def check_input_valid(input):
     try:
@@ -87,7 +83,6 @@ def read_passwd(key, account):
 
         # encrypt file
         pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
-
         delete_temp_file()
 
         # look for the account password in passwd file data
@@ -143,7 +138,6 @@ def read_all_accounts(key):
 
         # encrypt file
         pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
-
         delete_temp_file()
 
         # print('All Your Accounts:')
@@ -172,7 +166,7 @@ def hard_reset():
 # if passwd file does not exist create one
 try:
     with open('passwd.txt.aes', 'r') as passwd:
-        print('passwd file found')
+        print('passwd.txt.aes file found')
 except:
     print('creating passwd file')
     create_file(master_key)
@@ -225,5 +219,4 @@ def read_encrypted_file(key):
 
 # read_encrypted_file(master_key)
 
-# TODO: Clean out print statements
 # TODO: Make this script executable for UNIX systems
