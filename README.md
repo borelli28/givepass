@@ -69,7 +69,7 @@ This Action Will ERASE All Your Data! Do you want to continue? [Y/N]:
 
 ```
 
-## TODO
+## TO DO
 
 - Make script run continuously until user kills the program
 - Add option to delete a single credential
