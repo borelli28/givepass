@@ -15,6 +15,7 @@ pip install foobar
 ## Usage
 
 ```bash
+
 # First prompt ask for a master key.
 # This key will be used to encrypt and decrypt(Symmetric) the passwd.txt.aes file where all your credentials are stored
 Enter master key:
@@ -35,13 +36,14 @@ Enter password:
 Account saved
 
 # Display All Accounts: Will retrieve all Account names and display them in the console for you
-#output:
+# Output:
 All Your Accounts:
 account1
 account2
 account3
 
 # Hard Reset: Will delete the file(passwd.txt.aes) where credentials are stored. Used to delete all credentials at once
+This Action Will ERASE All Your Data! Do you want to continue? [Y/N]:
 
 ```
 
