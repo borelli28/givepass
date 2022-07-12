@@ -225,4 +225,5 @@ def read_encrypted_file(key):
 
 # read_encrypted_file(master_key)
 
-# TODO: Hard reset method, delete passwd.txt.aes file
+# TODO: Clean out print statements
+# TODO: Make this script executable for UNIX systems
