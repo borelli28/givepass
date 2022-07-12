@@ -38,7 +38,7 @@ def read_passwd(key, account):
         for line in passwd:
            (key, val) = line.split()
            passwords[key] = val
-        print(f'here are all your passwords: {d}')
+        print(f'here are all your passwords: {passwords}')
 
     # encrypt file
     pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
@@ -46,8 +46,20 @@ def read_passwd(key, account):
     delete_temp_file()
 
     # look for the account password in passwd file data
-    password = passwords['account']
+    password = passwords[account]
     return password
+
+def write_passwd(key, account, password):
+    # decrypt file
+    pyAesCrypt.decryptFile("passwd.txt.aes", "temp.txt", master_key)
+
+    with open('temp.txt', 'a') as passwd:
+        passwd.writelines(f'{account} {password}\n')
+
+    # encrypt file
+    pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
+
+    delete_temp_file()
 
 # if passwd file does not exist create one
 try:
@@ -62,12 +74,17 @@ if give_or_take == 'a':
 
     account = input('Enter account name: ')
 
-    read_passwd(master_key, account)
+    print(read_passwd(master_key, account))
 
 # write(append) to file
 elif give_or_take == 'd':
 
-    write_passwd(key, data)
+    account = input('Enter account name: ')
+
+    password = input('Enter password: ')
+
+    write_passwd(master_key, account, password)
+    print('Account saved')
 
 else:
     print('wrong! try again bozo')
