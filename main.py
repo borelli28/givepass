@@ -27,7 +27,7 @@ def delete_temp_file():
     else:
       print("The file does not exist")
 
-def read_passwd(key):
+def read_passwd(key, account):
     d = {}
 
     # decrypt file
@@ -39,6 +39,8 @@ def read_passwd(key):
            (key, val) = line.split()
            d[key] = val
         print(f'here are your passwords: {d}')
+
+
 
     # encrypt file
     pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
@@ -55,7 +57,10 @@ except:
 
 # read file
 if give_or_take == 'a':
-    read_passwd(master_key)
+
+    account = input('Enter account name: ')
+
+    read_passwd(master_key, account)
 
 # write(append) to file
 elif give_or_take == 'd':
