@@ -28,7 +28,7 @@ def delete_temp_file():
       print("The file does not exist")
 
 def read_passwd(key, account):
-    d = {}
+    passwords = {}
 
     # decrypt file
     pyAesCrypt.decryptFile("passwd.txt.aes", "temp.txt", master_key)
@@ -37,15 +37,17 @@ def read_passwd(key, account):
     with open('temp.txt', 'r') as passwd:
         for line in passwd:
            (key, val) = line.split()
-           d[key] = val
-        print(f'here are your passwords: {d}')
-
-
+           passwords[key] = val
+        print(f'here are all your passwords: {d}')
 
     # encrypt file
     pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
 
     delete_temp_file()
+
+    # look for the account password in passwd file data
+    password = passwords['account']
+    return password
 
 # if passwd file does not exist create one
 try:
