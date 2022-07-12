@@ -9,7 +9,8 @@ print(f'master key: {master_key}')
 give_or_enter = input('(a)give me password || (d)take password: ')
 print(f'user wants to: {give_or_enter}')
 
-# open and decrypt file
+# TODO: Need to encrypt and decrypt file(https://pypi.org/project/pyAesCrypt/)
+# TODO: If passwd.txt does not exist, create and encrypt file
 
 if give_or_enter == 'a':
     d = {}
