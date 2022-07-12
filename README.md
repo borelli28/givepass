@@ -20,8 +20,13 @@ pip install foobar
 Enter master key:
 
 # You have four options:
-# Read Credentials: Will ask you for an account name(Ex: twitter, google, etc.) and it will output the password for that account
-(R)Read Credentials - (W)Write New Credentials - (D)Display All Accounts - (!)Hard Reset:
-
+# Read Credentials: Ask you for an account name(Ex: twitter, google, etc.) and it will output the password for that account
+# Write Credentials: Ask for an Account name, an Username, and a Password. This will add a new credential
+# Display All Accounts: Will retrieve all Accounts names and display them in the console for you
+(R)Read Credentials - (W)Write Credentials - (D)Display All Accounts - (!)Hard Reset:
 
 ```
+
+## TODO
+
+- Add option to delete a single credential
