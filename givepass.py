@@ -208,4 +208,5 @@ while True:
     # read_encrypted_file(master_key)
 
     def quit():
+        print('Quitting program...')
         sys.exit()
