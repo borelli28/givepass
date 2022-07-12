@@ -20,7 +20,7 @@ pip install foobar
 Enter master key:
 
 # You have four options:
-# (R) Will ask you for an account name(Ex: twitter, google, etc.) and it will output the password for that account
+# Read Credentials: Will ask you for an account name(Ex: twitter, google, etc.) and it will output the password for that account
 (R)Read Credentials - (W)Write New Credentials - (D)Display All Accounts - (!)Hard Reset:
 
 
