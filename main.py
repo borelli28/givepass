@@ -6,12 +6,22 @@ import sys
 master_key = input('Enter master key: ')
 print(f'master key: {master_key}')
 
+# delete passwd.txt file since the file is a temp file
+def delete_temp_file():
+    if os.path.exists('temp.txt'):
+      os.remove('temp.txt')
+      print('temp.txt removed')
+    else:
+      print('temp.txt does not exist')
+
 def check_master_key(key):
     try:
-        # decrypt file
         pyAesCrypt.decryptFile("passwd.txt.aes", "temp.txt", master_key)
+        pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
+        delete_temp_file()
     except:
         print('WRONG! Try again bozo')
+        delete_temp_file()
         sys.exit()
 
 check_master_key(master_key)
@@ -27,14 +37,6 @@ def create_file(key):
         print(f'encrypted passwd created: {passwd}')
 
         delete_temp_file()
-
-# delete passwd.txt file since the file is a temp file
-def delete_temp_file():
-    if os.path.exists("temp.txt"):
-      os.remove("temp.txt")
-      print('temp.txt removed')
-    else:
-      print("The file does not exist")
 
 def read_passwd(key, account):
     passwords = {}
