@@ -1,7 +1,7 @@
 
 # GIVEPASS
 
-GIVEPASS is a Python script for storing dummy account credentials. The script can be executed from the command line. Credentials are stored in an external file(passwd.txt.aes) encrypted with AES256 with [pyAesCrypt](https://pypi.org/project/pyAesCrypt/)
+GIVEPASS is a Python script for storing dummy account credentials. The script can be run from the command line. Credentials are stored in an external file(passwd.txt.aes) encrypted with AES256-CBC [pyAesCrypt](https://pypi.org/project/pyAesCrypt/)
 
 **DON'T USE THIS TO STORE REAL CREDENTIALS! THIS SCRIPT WAS NOT DESIGNED AS A SECURE WAY TO STORE CREDENTIALS!**
 
