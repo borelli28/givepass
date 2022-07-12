@@ -150,6 +150,7 @@ else:
     print('You entered a invalid option')
     sys.exit()
 
+# Read entire passwd.txt.aes document. Used for debugging
 def read_encrypted_file(key):
     print('inside read_encrypted_file()')
 
@@ -165,6 +166,6 @@ def read_encrypted_file(key):
 
     delete_temp_file()
 
-read_encrypted_file(master_key)
+# read_encrypted_file(master_key)
 
 # TODO: Try blocks for all methods
