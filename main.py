@@ -2,9 +2,11 @@ import pyAesCrypt
 import os
 import sys
 
+
 # ask user for master key, then use master key to decrypt password file
 master_key = input('Enter master key: ')
 print(f'master key: {master_key}')
+
 
 # delete passwd.txt file since the file is a temp file
 def delete_temp_file():
@@ -13,6 +15,14 @@ def delete_temp_file():
       print('temp file removed')
     else:
       print('temp file does not exist')
+
+def create_file(key):
+    with open('temp.txt', 'a') as passwd:
+        # encrypt file
+        pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
+        print(f'encrypted passwd created: {passwd}')
+
+        delete_temp_file()
 
 def check_master_key(key):
     try:
@@ -24,7 +34,11 @@ def check_master_key(key):
         delete_temp_file()
         sys.exit()
 
-check_master_key(master_key)
+# checks if passwd.txt.aes file exist, else we need to create a new one
+if os.path.exists('passwd.txt.aes'):
+    check_master_key(master_key)
+else:
+    create_file(master_key)
 
 # give password or enter password
 options = input('(R)Read Password - (W)Write Password - (A)Read All Accounts:  ').capitalize()
@@ -42,14 +56,6 @@ def check_input_valid(input):
         print('Error found in check_input_valid')
         delete_temp_file()
         sys.exit()
-
-def create_file(key):
-    with open('temp.txt', 'a') as passwd:
-        # encrypt file
-        pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
-        print(f'encrypted passwd created: {passwd}')
-
-        delete_temp_file()
 
 def read_passwd(key, account):
     passwords = {}
@@ -75,6 +81,10 @@ def read_passwd(key, account):
     return password
 
 def write_passwd(key, account, username, password):
+
+    check_input_valid(account)
+    check_input_valid(username)
+    check_input_valid(password)
 
     # check that account does not exist already
     accounts = read_all_accounts(key)
@@ -169,3 +179,4 @@ def read_encrypted_file(key):
 # read_encrypted_file(master_key)
 
 # TODO: Try blocks for all methods
+# TODO: Hard reset method, delete passwd.txt.aes file
