@@ -6,8 +6,8 @@ master_key = input('Enter master key: ')
 print(f'master key: {master_key}')
 
 # give password or enter password
-give_or_take = input('(a)give me password || (d)take password: ')
-print(f'user wants to: {give_or_take}')
+options = input('(R)Read Password - (W)Write Password - (A)Read All Passwords:  ').capitalize()
+print(f'user wants to: {options}')
 
 # TODO: Need to encrypt and decrypt file(https://pypi.org/project/pyAesCrypt/)
 
@@ -70,14 +70,14 @@ except:
     create_file(master_key)
 
 # read file
-if give_or_take == 'a':
+if options == 'R':
 
     account = input('Enter account name: ')
 
     print(read_passwd(master_key, account))
 
 # write(append) to file
-elif give_or_take == 'd':
+elif options == 'W':
 
     account = input('Enter account name: ')
 
@@ -89,19 +89,19 @@ elif give_or_take == 'd':
 else:
     print('wrong! try again bozo')
 
-def read_encrypted_file(key):
-    print('inside read_encrypted_file()')
-
-    # decrypt file
-    pyAesCrypt.decryptFile("passwd.txt.aes", "temp.txt", master_key)
-
-    with open('temp.txt', 'r') as passwd:
-        print('reading tempt.txt:')
-        print(passwd.read())
-
-    # encrypt file
-    pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
-
-    delete_temp_file()
-
-read_encrypted_file(master_key)
+# def read_encrypted_file(key):
+#     print('inside read_encrypted_file()')
+#
+#     # decrypt file
+#     pyAesCrypt.decryptFile("passwd.txt.aes", "temp.txt", master_key)
+#
+#     with open('temp.txt', 'r') as passwd:
+#         print('reading tempt.txt:')
+#         print(passwd.read())
+#
+#     # encrypt file
+#     pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
+#
+#     delete_temp_file()
+#
+# read_encrypted_file(master_key)
