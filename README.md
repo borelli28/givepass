@@ -7,8 +7,6 @@ GIVEPASS is a Python script for storing dummy account credentials. The script ca
 
 ## Installation for Linux
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
-
 Download GIVEPASS folder:
 ```bash
 git clone https://github.com/borelli28/givepass.git
