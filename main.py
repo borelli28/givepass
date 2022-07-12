@@ -6,10 +6,12 @@ master_key = input('Enter master key: ')
 print(f'master key: {master_key}')
 
 # give password or enter password
-options = input('(R)Read Password - (W)Write Password - (A)Read All Passwords:  ').capitalize()
+options = input('(R)Read Password - (W)Write Password - (A)Read All Accounts:  ').capitalize()
 print(f'user wants to: {options}')
 
-# TODO: Need to encrypt and decrypt file(https://pypi.org/project/pyAesCrypt/)
+# TODO: Read all accounts
+# TODO: Check for already existing account in write_passwd()
+# TODO: Add email or username to account in write_passwd
 
 def create_file(key):
     with open('temp.txt', 'a') as passwd:
@@ -61,6 +63,25 @@ def write_passwd(key, account, password):
 
     delete_temp_file()
 
+def read_all_accounts(key):
+    passwords = {}
+
+    # decrypt file
+    pyAesCrypt.decryptFile("passwd.txt.aes", "temp.txt", master_key)
+
+    # convert passwd.txt data into a dictionary
+    with open('temp.txt', 'r') as passwd:
+        for line in passwd:
+           (key, val) = line.split()
+           passwords[key] = val
+
+    # encrypt file
+    pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
+
+    delete_temp_file()
+
+    return passwords.keys()
+
 # if passwd file does not exist create one
 try:
     with open('passwd.txt.aes', 'r') as passwd:
@@ -85,6 +106,10 @@ elif options == 'W':
 
     write_passwd(master_key, account, password)
     print('Account saved')
+
+elif options == 'A':
+
+    print(read_all_accounts(master_key))
 
 else:
     print('wrong! try again bozo')
