@@ -1,6 +1,7 @@
 # GIVEPASS
 
-GIVEPASS is a Python script for storing accounts credentials. The script can be executed from the command line
+GIVEPASS is a Python script for storing dummy accounts credentials. The script can be executed from the command line
+DON'T USE THIS TO STORE REAL CREDENTIALS! THIS SCRIPT IS NOT A SECURE WAY TO STORE YOUR CREDENTIALS!
 
 ## Installation
 
