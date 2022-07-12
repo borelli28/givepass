@@ -15,7 +15,8 @@ pip install foobar
 ## Usage
 
 ```python
-# First prompt ask for a master key. This key will be used to encrypt and decrypt(Symmetric) the passwd.txt.aes file where all your credentials are stored
+# First prompt ask for a master key.
+# This key will be used to encrypt and decrypt(Symmetric) the passwd.txt.aes file where all your credentials are stored
 Enter master key:
 
 # returns 'words'
