@@ -50,8 +50,8 @@ except:
     print('Error found while checking if passwd.txt.aes file exist')
     sys.exit()
 
-# give password or enter password
-options = input('(R)Read Password - (W)Write Password - (A)Read All Accounts - (!)Hard Reset: ').capitalize()
+# Options presented to user
+options = input('(R)Read Credentials - (W)Write New Credentials - (D)Display All Accounts - (!)Hard Reset: ').capitalize()
 
 def check_input_valid(input):
     try:
@@ -189,7 +189,7 @@ elif options == 'W':
     write_passwd(master_key, account, username, password)
     print('Account saved')
 
-elif options == 'A':
+elif options == 'D':
     read_all_accounts(master_key)
 
 elif options == '!':
