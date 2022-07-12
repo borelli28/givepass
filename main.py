@@ -47,7 +47,7 @@ if give_or_take == 'a':
         for line in passwd:
            (key, val) = line.split()
            d[key] = val
-        print(d)
+        print(f'here are your passwords: {d}')
 
     # encrypt file
     pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
