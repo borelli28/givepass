@@ -84,7 +84,6 @@ def read_passwd(key, account):
             for line in passwd:
                (key, val1, val2) = line.split()
                passwords[key] = f'USERNAME: {val1}  PASSWORD: {val2}'
-            print(f'here are all your passwords: {passwords}')
 
         # encrypt file
         pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
@@ -107,23 +106,23 @@ def write_passwd(key, account, username, password):
 
         # check that account does not exist already
         accounts = read_all_accounts(key)
-        for i in accounts:
-            print(i)
-            if i == account:
-                print('Account with that name already exist! Please enter a different account')
-                sys.exit()
+        if accounts != None:
+            for i in accounts:
+                print(i)
+                if i == account:
+                    print('Account with that name already exist! Please enter a different account')
+                    sys.exit()
 
         # decrypt file
         pyAesCrypt.decryptFile("passwd.txt.aes", "temp.txt", master_key)
 
         with open('temp.txt', 'a') as passwd:
-
             passwd.writelines(f'{account} {username} {password}\n')
 
         # encrypt file
         pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
-
         delete_temp_file()
+
     except:
         print('Error found in write_passwd()')
         sys.exit()
@@ -147,7 +146,10 @@ def read_all_accounts(key):
 
         delete_temp_file()
 
-        return passwords.keys()
+        # print('All Your Accounts:')
+        for key in passwords.keys():
+            print(key)
+
     except:
         print('Error found in read_all_accounts()')
         sys.exit()
@@ -206,13 +208,11 @@ else:
 def read_encrypted_file(key):
 
     try:
-        print('inside read_encrypted_file()')
-
         # decrypt file
         pyAesCrypt.decryptFile("passwd.txt.aes", "temp.txt", master_key)
 
         with open('temp.txt', 'r') as passwd:
-            print('reading tempt.txt:')
+            print('read_encrypted_file() reading tempt.txt:')
             print(passwd.read())
 
         # encrypt file
@@ -223,7 +223,7 @@ def read_encrypted_file(key):
         print('Error found in read_encrypted_file()')
         sys.exit()
 
-# read_encrypted_file(master_key)
+read_encrypted_file(master_key)
 
 # TODO: Clean out print statements
 # TODO: Make this script executable for UNIX systems
