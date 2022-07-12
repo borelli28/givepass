@@ -4,12 +4,12 @@ import os
 import sys
 
 
-# ask user for master key, then use master key to decrypt password file
+# ask user for master key. Used to Encrypt and decrypt passwd.txt.aes file
 master_key = input('Enter master key: ')
 print(f'master key: {master_key}')
 
 
-# delete passwd.txt file since the file is a temp file
+# delete temp.txt file since the file is only used while reading and writing to file
 def delete_temp_file():
     try:
         if os.path.exists('temp.txt'):
@@ -130,7 +130,7 @@ def read_all_accounts(key):
         # decrypt file
         pyAesCrypt.decryptFile("passwd.txt.aes", "temp.txt", master_key)
 
-        # convert passwd.txt data into a dictionary
+        # convert passwd.txt.aes data into a dictionary
         with open('temp.txt', 'r') as passwd:
             for line in passwd:
                (key, val1, val2) = line.split()
@@ -164,7 +164,7 @@ def hard_reset():
         print('Error found in hard_reset()')
         sys.exit()
 
-# if passwd file does not exist create one
+# if passwd file does not exist, create one
 try:
     with open('passwd.txt.aes', 'r') as passwd:
         print('passwd.txt.aes file found')
