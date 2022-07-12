@@ -54,7 +54,7 @@ except:
     sys.exit()
 
 # give password or enter password
-options = input('(R)Read Password - (W)Write Password - (A)Read All Accounts:  ').capitalize()
+options = input('(R)Read Password - (W)Write Password - (A)Read All Accounts - (RST)Hard Reset: ').capitalize()
 print(f'Option selected: {options}')
 
 def check_input_valid(input):
@@ -150,6 +150,22 @@ def read_all_accounts(key):
         return passwords.keys()
     except:
         print('Error found in read_all_accounts()')
+        sys.exit()
+
+def hard_reset():
+    try:
+        confirmed = input('This Action Will ERASE All Your Data! Do you want to continue? [Y/N]: ').capitalize()
+
+        if confirmed == 'Y':
+            os.remove('passwd.txt.aes')
+            print('Hard reset executed')
+            delete_temp_file()
+            sys.exit()
+        else:
+            delete_temp_file()
+            sys.exit()
+    except:
+        print('Error found in hard_reset()')
         sys.exit()
 
 # if passwd file does not exist create one
