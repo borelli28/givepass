@@ -10,9 +10,9 @@ print(f'master key: {master_key}')
 def delete_temp_file():
     if os.path.exists('temp.txt'):
       os.remove('temp.txt')
-      print('temp.txt removed')
+      print('temp file removed')
     else:
-      print('temp.txt does not exist')
+      print('temp file does not exist')
 
 def check_master_key(key):
     try:
