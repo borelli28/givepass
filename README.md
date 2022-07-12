@@ -34,7 +34,13 @@ Enter password:
 #output:
 Account saved
 
-# Display All Accounts: Will retrieve all Accounts names and display them in the console for you
+# Display All Accounts: Will retrieve all Account names and display them in the console for you
+#output:
+All Your Accounts:
+account1
+account2
+account3
+
 # Hard Reset: Will delete the file(passwd.txt.aes) where credentials are stored. Used to delete all credentials at once
 
 ```
