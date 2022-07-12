@@ -6,7 +6,6 @@ import sys
 
 # ask user for master key. Used to Encrypt and decrypt passwd.txt.aes file
 master_key = input('Enter master key: ')
-print(f'master key: {master_key}')
 
 
 # delete temp.txt file since the file is only used while reading and writing to file
