@@ -11,10 +11,10 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
 
 Download GIVEPASS folder:
 ```bash
-
+git clone https://github.com/borelli28/givepass.git
 ```
 
-In terminal navigate to directory where givepass.py is located:
+Navigate to directory where givepass.py is located:
 ```bash
 cd /Home/user/Downloads/givepass-master/
 ```
