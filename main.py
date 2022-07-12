@@ -50,7 +50,7 @@ except:
     sys.exit()
 
 # Options presented to user
-options = input('(R)Read Credentials - (W)Write New Credentials - (D)Display All Accounts - (!)Hard Reset: ').capitalize()
+options = input('(R)Read Credentials - (W)WriteCredentials - (D)Display All Accounts - (!)Hard Reset: ').capitalize()
 
 def check_input_valid(input):
     try:
