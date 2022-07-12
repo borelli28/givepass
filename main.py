@@ -218,6 +218,6 @@ def read_encrypted_file(key):
         print('Error found in read_encrypted_file()')
         sys.exit()
 
-read_encrypted_file(master_key)
+# read_encrypted_file(master_key)
 
 # TODO: Make this script executable for UNIX systems
