@@ -19,12 +19,9 @@ pip install foobar
 # This key will be used to encrypt and decrypt(Symmetric) the passwd.txt.aes file where all your credentials are stored
 Enter master key:
 
-# returns 'words'
-foobar.pluralize('word')
+# You have four options:
+# (R) Will ask you for an account name(Ex: twitter, google, etc.) and it will output the password for that account
+(R)Read Credentials - (W)Write New Credentials - (D)Display All Accounts - (!)Hard Reset:
 
-# returns 'geese'
-foobar.pluralize('goose')
 
-# returns 'phenomenon'
-foobar.singularize('phenomena')
 ```
