@@ -67,16 +67,7 @@ if give_or_take == 'a':
 # write(append) to file
 elif give_or_take == 'd':
 
-    # decrypt file
-    pyAesCrypt.decryptFile("passwd.txt.aes", "temp.txt", master_key)
-
-    with open('temp.txt', 'a') as passwd:
-        passwd.writelines('three there\n')
-
-    # encrypt file
-    pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
-
-    delete_temp_file()
+    write_passwd(key, data)
 
 else:
     print('wrong! try again bozo')
