@@ -54,7 +54,7 @@ except:
     sys.exit()
 
 # give password or enter password
-options = input('(R)Read Password - (W)Write Password - (A)Read All Accounts - (RST)Hard Reset: ').capitalize()
+options = input('(R)Read Password - (W)Write Password - (A)Read All Accounts - (!)Hard Reset: ').capitalize()
 print(f'Option selected: {options}')
 
 def check_input_valid(input):
@@ -160,10 +160,9 @@ def hard_reset():
             os.remove('passwd.txt.aes')
             print('Hard reset executed')
             delete_temp_file()
-            sys.exit()
         else:
+            print('Hard Reset Not Confirmed')
             delete_temp_file()
-            sys.exit()
     except:
         print('Error found in hard_reset()')
         sys.exit()
@@ -178,14 +177,12 @@ except:
 
 # read file
 if options == 'R':
-
     account = input('Enter account name: ')
 
     print(read_passwd(master_key, account))
 
 # write(append) to file
 elif options == 'W':
-
     account = input('Enter account name:    ')
 
     username = input('Enter username or email for account:  ')
@@ -196,8 +193,10 @@ elif options == 'W':
     print('Account saved')
 
 elif options == 'A':
-
     print(read_all_accounts(master_key))
+
+elif options == '!':
+    hard_reset()
 
 else:
     print('You entered a invalid option')
