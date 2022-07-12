@@ -28,7 +28,17 @@ check_master_key(master_key)
 
 # give password or enter password
 options = input('(R)Read Password - (W)Write Password - (A)Read All Accounts:  ').capitalize()
-print(f'user wants to: {options}')
+print(f'Option selected: {options}')
+
+def input_valid(input):
+    try:
+        if type(input) == str and len(input) > 0:
+            return True
+        else:
+            False
+    except:
+        print('Error found in input_valid()')
+        sys.exit()
 
 def create_file(key):
     with open('temp.txt', 'a') as passwd:
@@ -133,7 +143,8 @@ elif options == 'A':
     print(read_all_accounts(master_key))
 
 else:
-    print('wrong! try again bozo')
+    print('You entered a invalid option')
+    sys.exit()
 
 def read_encrypted_file(key):
     print('inside read_encrypted_file()')
@@ -150,4 +161,6 @@ def read_encrypted_file(key):
 
     delete_temp_file()
 
-# read_encrypted_file(master_key)
+read_encrypted_file(master_key)
+
+# TODO: Try blocks for all methods
