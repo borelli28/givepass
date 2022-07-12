@@ -28,6 +28,12 @@ Enter account name:
 USERNAME: joe123   PASSWORD: ilovegod
 
 # Write Credentials: Ask for an Account name, an Username, and a Password. This will add a new credential
+Enter account name:
+Enter username or email for account:
+Enter password:
+#output:
+Account saved
+
 # Display All Accounts: Will retrieve all Accounts names and display them in the console for you
 # Hard Reset: Will delete the file(passwd.txt.aes) where credentials are stored. Used to delete all credentials at once
 
@@ -37,3 +43,4 @@ USERNAME: joe123   PASSWORD: ilovegod
 
 - Add option to delete a single credential
 - Add print statement in read_passwd() for when an account is not found
+- Fixed bug in write_passwd() where read_all_accounts() is executed too
