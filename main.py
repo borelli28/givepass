@@ -35,8 +35,8 @@ def read_passwd(key, account):
     # convert passwd.txt data into a dictionary
     with open('temp.txt', 'r') as passwd:
         for line in passwd:
-           (key, val) = line.split()
-           passwords[key] = val
+           (key, val1, val2) = line.split()
+           passwords[key] = f'USERNAME: {val1}  PASSWORD: {val2}'
         print(f'here are all your passwords: {passwords}')
 
     # encrypt file
@@ -48,7 +48,7 @@ def read_passwd(key, account):
     password = passwords[account]
     return password
 
-def write_passwd(key, account, password):
+def write_passwd(key, account, username, password):
 
     # check that account does not exist already
     accounts = read_all_accounts(key)
@@ -63,7 +63,7 @@ def write_passwd(key, account, password):
 
     with open('temp.txt', 'a') as passwd:
 
-        passwd.writelines(f'{account} {password}\n')
+        passwd.writelines(f'{account} {username} {password}\n')
 
     # encrypt file
     pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
@@ -79,8 +79,8 @@ def read_all_accounts(key):
     # convert passwd.txt data into a dictionary
     with open('temp.txt', 'r') as passwd:
         for line in passwd:
-           (key, val) = line.split()
-           passwords[key] = val
+           (key, val1, val2) = line.split()
+           passwords[key] = f'USERNAME: {val1}  PASSWORD: {val2}'
 
     # encrypt file
     pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
@@ -107,11 +107,13 @@ if options == 'R':
 # write(append) to file
 elif options == 'W':
 
-    account = input('Enter account name: ')
+    account = input('Enter account name:    ')
 
-    password = input('Enter password: ')
+    username = input('Enter username or email for account:  ')
 
-    write_passwd(master_key, account, password)
+    password = input('Enter password:   ')
+
+    write_passwd(master_key, account, username, password)
     print('Account saved')
 
 elif options == 'A':
@@ -137,5 +139,3 @@ else:
 #     delete_temp_file()
 #
 # read_encrypted_file(master_key)
-
-# TODO: Add email or username to account in write_passwd
