@@ -1,5 +1,6 @@
 import pyAesCrypt
 import os
+import sys
 
 # ask user for master key, then use master key to decrypt password file
 master_key = input('Enter master key: ')
@@ -48,10 +49,20 @@ def read_passwd(key, account):
     return password
 
 def write_passwd(key, account, password):
+
+    # check that account does not exist already
+    accounts = read_all_accounts(key)
+    for i in accounts:
+        print(i)
+        if i == account:
+            print('Account with that name already exist! Please enter a different account')
+            sys.exit()
+
     # decrypt file
     pyAesCrypt.decryptFile("passwd.txt.aes", "temp.txt", master_key)
 
     with open('temp.txt', 'a') as passwd:
+
         passwd.writelines(f'{account} {password}\n')
 
     # encrypt file
@@ -127,6 +138,4 @@ else:
 #
 # read_encrypted_file(master_key)
 
-# TODO: Read all accounts
-# TODO: Check for already existing account in write_passwd()
 # TODO: Add email or username to account in write_passwd
