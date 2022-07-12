@@ -30,14 +30,17 @@ check_master_key(master_key)
 options = input('(R)Read Password - (W)Write Password - (A)Read All Accounts:  ').capitalize()
 print(f'Option selected: {options}')
 
-def input_valid(input):
+def check_input_valid(input):
     try:
         if type(input) == str and len(input) > 0:
             return True
         else:
-            False
+            print('Invalid Input')
+            delete_temp_file()
+            sys.exit()
     except:
-        print('Error found in input_valid()')
+        print('Error found in check_input_valid')
+        delete_temp_file()
         sys.exit()
 
 def create_file(key):
@@ -51,6 +54,7 @@ def create_file(key):
 def read_passwd(key, account):
     passwords = {}
 
+    check_input_valid(account)
     # decrypt file
     pyAesCrypt.decryptFile("passwd.txt.aes", "temp.txt", master_key)
 
