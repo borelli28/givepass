@@ -219,5 +219,3 @@ def read_encrypted_file(key):
         sys.exit()
 
 # read_encrypted_file(master_key)
-
-# TODO: Make this script executable for UNIX systems
