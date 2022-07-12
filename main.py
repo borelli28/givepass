@@ -140,9 +140,10 @@ def read_all_accounts(key):
         pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
         delete_temp_file()
 
-        # print('All Your Accounts:')
+        print('All Your Accounts:')
         for key in passwords.keys():
-            print(key)
+            if key != None:
+                print(key)
 
     except:
         print('Error found in read_all_accounts()')
@@ -179,17 +180,17 @@ if options == 'R':
 
 # write(append) to file
 elif options == 'W':
-    account = input('Enter account name:    ')
+    account = input('Enter account name: ')
 
-    username = input('Enter username or email for account:  ')
+    username = input('Enter username or email for account: ')
 
-    password = input('Enter password:   ')
+    password = input('Enter password: ')
 
     write_passwd(master_key, account, username, password)
     print('Account saved')
 
 elif options == 'A':
-    print(read_all_accounts(master_key))
+    read_all_accounts(master_key)
 
 elif options == '!':
     hard_reset()
@@ -217,6 +218,6 @@ def read_encrypted_file(key):
         print('Error found in read_encrypted_file()')
         sys.exit()
 
-# read_encrypted_file(master_key)
+read_encrypted_file(master_key)
 
 # TODO: Make this script executable for UNIX systems
