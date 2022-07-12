@@ -27,16 +27,7 @@ def delete_temp_file():
     else:
       print("The file does not exist")
 
-# if passwd file does not exist create one
-try:
-    with open('passwd.txt.aes', 'r') as passwd:
-        print('passwd file found')
-except:
-    print('creating passwd file')
-    create_file(master_key)
-
-# read file
-if give_or_take == 'a':
+def read_passwd(key):
     d = {}
 
     # decrypt file
@@ -53,6 +44,18 @@ if give_or_take == 'a':
     pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
 
     delete_temp_file()
+
+# if passwd file does not exist create one
+try:
+    with open('passwd.txt.aes', 'r') as passwd:
+        print('passwd file found')
+except:
+    print('creating passwd file')
+    create_file(master_key)
+
+# read file
+if give_or_take == 'a':
+    read_passwd(master_key)
 
 # write(append) to file
 elif give_or_take == 'd':
