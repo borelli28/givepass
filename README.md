@@ -14,14 +14,14 @@ Download GIVEPASS folder:
 
 ```
 
-Install required libraries from requirements.txt:
-```bash
-pip3 install -r requirements.txt
-```
-
 LINUX: In terminal navigate to directory where givepass.py is located:
 ```bash
 cd /Home/user/Downloads/givepass-master/
+```
+
+Install required libraries from requirements.txt:
+```bash
+pip3 install -r requirements.txt
 ```
 
 Give execute permission to givepass.py file:
