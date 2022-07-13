@@ -146,22 +146,32 @@ while True:
         except:
             print('Error found in read_all_accounts()')
 
-    # delete a single credential
+    # remove a single credential
     def remove_cred(account):
 
         # decrypt file
         pyAesCrypt.decryptFile("passwd.txt.aes", "temp.txt", master_key)
 
-        # create dictionary of accounts
+        # iterate through the file until you find the account
+        lines = None
         accounts = {}
         with open('temp.txt', 'r') as passwd:
-            for line in passwd:
-               (key, val1, val2) = line.split()
-               accounts[key] = f'USERNAME: {val1}  PASSWORD: {val2} \n'
+            lines = passwd.readlines()
 
-        # find the account and delete from the dictionary
-        del accounts[account]
-        print('credential removed \n')
+        with open('temp.txt', 'r') as passwd:
+            # convert passwd.txt data into a dictionary
+            for line in passwd:
+                (key, val, val2) = line.split()
+                accounts[key] = f'{val} {val2}'
+
+        # get credential line from dictionary
+        values = accounts[account]
+        cred = f'{account} {values}'
+
+        with open('temp.txt', 'w') as passwd:
+            for line in lines:
+                if line.strip('\n') != cred:
+                    passwd.write(line)
 
         # encrypt file
         pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
@@ -209,6 +219,7 @@ while True:
 
     elif options == 'D':
         account = input('Enter the account that you want to delete: ')
+
         remove_cred(account)
 
     elif options == 'Q':
