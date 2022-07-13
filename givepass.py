@@ -89,23 +89,29 @@ while True:
     def write_passwd(key, account, username, password):
 
         try:
+            duplicate = False
             check_input_valid(account)
             check_input_valid(username)
             check_input_valid(password)
 
-            # check that account does not exist already
-            accounts = read_all_accounts(key)
-            if accounts != None:
-                for i in accounts:
-                    print(i)
-                    if i == account:
-                        print('Account with that name already exist! Please enter a different account')
-
             # decrypt file
             pyAesCrypt.decryptFile("passwd.txt.aes", "temp.txt", master_key)
 
-            with open('temp.txt', 'a') as passwd:
-                passwd.writelines(f'{account} {username} {password}\n')
+            # check that account does we don't have an account with the same name already
+            accounts = {}
+            with open('temp.txt', 'r') as passwd:
+                for line in passwd:
+                   (key, val1, val2) = line.split()
+                   accounts[key] = f'USERNAME: {val1}  PASSWORD: {val2} \n'
+                if len(accounts) > 0:
+                    for i in accounts:
+                        if i == account:
+                            print('Account with that name already exist! Please enter a different account \n')
+                            duplicate = True
+            if not duplicate:
+                with open('temp.txt', 'a') as passwd:
+                    passwd.writelines(f'{account} {username} {password}\n')
+                    print('New account saved \n')
 
             # encrypt file
             pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
@@ -176,7 +182,6 @@ while True:
         password = input('Enter password: ')
 
         write_passwd(master_key, account, username, password)
-        print('New account saved \n')
 
     elif options == 'D':
         read_all_accounts(master_key)
