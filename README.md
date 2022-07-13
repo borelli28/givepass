@@ -40,8 +40,8 @@ Run script
 # This key will be used to encrypt and decrypt(Symmetric) the passwd.txt.aes file where all your credentials are stored
 Enter master key:
 
-# You have five options:
-(R)Read Credentials - (W)Write Credentials - (D)Display All Accounts - (Q)Quit (!)Hard Reset:
+# You have six options:
+(R)Read Credentials - (W)Write Credentials - (A)Display All Accounts - (D)Remove a Credential - (Q)Quit - (!)Hard Reset:
 
 # Read Credentials: Ask you for an account name(Ex: twitter, google, etc.) and it will output the username & password for that account
 Enter account name:
@@ -61,6 +61,9 @@ All Your Accounts:
 account1
 account2
 account3
+
+# Remove a Credential: Will remove the given account
+Enter the account that you want to remove:
 
 # Hard Reset: Will delete the file(passwd.txt.aes) where credentials are stored. Used to delete all credentials at once
 This Action Will ERASE All Your Data! Do you want to continue? [Y/N]:
