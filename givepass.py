@@ -8,7 +8,8 @@ import sys
 master_key = input('Enter master key: ')
 
 # run the program until user choose to quit
-while True:
+while master_key:
+    print(f'Master Key: {master_key}')
 
     # delete temp.txt file since the file is only used while reading and writing to file
     def delete_temp_file():
@@ -62,7 +63,6 @@ while True:
             delete_temp_file()
 
     def read_passwd(key, account):
-
         try:
             passwords = {}
 
@@ -87,7 +87,6 @@ while True:
             print('Error found in read_passwd()')
 
     def write_passwd(key, account, username, password):
-
         try:
             duplicate = False
             check_input_valid(account)
@@ -121,7 +120,6 @@ while True:
             print('Error found in write_passwd()')
 
     def read_all_accounts(key):
-
         try:
             passwords = {}
 
@@ -148,52 +146,78 @@ while True:
 
     # remove a single credential
     def remove_cred(account):
-
-        # decrypt file
-        pyAesCrypt.decryptFile("passwd.txt.aes", "temp.txt", master_key)
-
-        # iterate through the file until you find the account
-        lines = None
-        accounts = {}
-        with open('temp.txt', 'r') as passwd:
-            lines = passwd.readlines()
-
-        with open('temp.txt', 'r') as passwd:
-            # convert passwd.txt data into a dictionary
-            for line in passwd:
-                (key, val, val2) = line.split()
-                accounts[key] = f'{val} {val2}'
-
         try:
-            # get credential line from dictionary
-            values = accounts[account]
-            cred = f'{account} {values}'
+            # decrypt file
+            pyAesCrypt.decryptFile("passwd.txt.aes", "temp.txt", master_key)
 
-            with open('temp.txt', 'w') as passwd:
-                for line in lines:
-                    if line.strip('\n') != cred:
-                        passwd.write(line)
-                print(f'{account} removed')
+            # iterate through the file until you find the account
+            lines = None
+            accounts = {}
+            with open('temp.txt', 'r') as passwd:
+                lines = passwd.readlines()
+
+            with open('temp.txt', 'r') as passwd:
+                # convert passwd.txt data into a dictionary
+                for line in passwd:
+                    (key, val, val2) = line.split()
+                    accounts[key] = f'{val} {val2}'
+
+            try:
+                # get credential line from dictionary
+                values = accounts[account]
+                cred = f'{account} {values}'
+
+                with open('temp.txt', 'w') as passwd:
+                    for line in lines:
+                        if line.strip('\n') != cred:
+                            passwd.write(line)
+                    print(f'{account} removed')
+            except:
+                print('Account you entered does not exist \n')
+
+            # encrypt file
+            pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
+            delete_temp_file()
         except:
-            print('Account you entered does not exist \n')
-
-        # encrypt file
-        pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
-        delete_temp_file()
+            print('Error found in remove_cred()')
 
     def hard_reset():
-        try:
-            confirmed = input('This Action Will ERASE All Your Data! Do you want to continue? [Y/N]: ').capitalize()
+        # try:
+        confirmed = input('This Action Will ERASE All Your Data! Do you want to continue? [Y/N]: ').capitalize()
 
-            if confirmed == 'Y':
-                os.remove('passwd.txt.aes')
-                print('Hard reset executed \n')
-                delete_temp_file()
-            else:
-                print('Hard Reset Not Confirmed \n')
-                delete_temp_file()
-        except:
-            print('Error found in hard_reset()')
+        if confirmed == 'Y':
+            delete_temp_file()
+            os.remove('passwd.txt.aes')
+            print('Hard reset executed \n')
+            quit_program()
+        else:
+            print('Hard Reset Not Confirmed \n')
+            delete_temp_file()
+        # except:
+        #     print(f'Error found in hard_reset()')
+
+    def quit_program():
+        print('Quitting... \n')
+        sys.exit()
+
+    # Read entire passwd.txt.aes document. Used for debugging
+    # def read_encrypted_file(key):
+    #
+    #     try:
+    #         # decrypt file
+    #         pyAesCrypt.decryptFile("passwd.txt.aes", "temp.txt", master_key)
+    #
+    #         with open('temp.txt', 'r') as passwd:
+    #             print('read_encrypted_file() reading tempt.txt:')
+    #             print(passwd.read())
+    #
+    #         # encrypt file
+    #         pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
+    #
+    #         delete_temp_file()
+    #     except:
+    #         print('Error found in read_encrypted_file()')
+    # read_encrypted_file(master_key)
 
     # if passwd file does not exist, create one
     try:
@@ -227,31 +251,10 @@ while True:
         remove_cred(account)
 
     elif options == 'Q':
-        print('Quitting program... \n')
-        sys.exit()
+        quit_program()
 
     elif options == '!':
         hard_reset()
 
     else:
         print('You entered a invalid option \n')
-
-    # Read entire passwd.txt.aes document. Used for debugging
-    def read_encrypted_file(key):
-
-        try:
-            # decrypt file
-            pyAesCrypt.decryptFile("passwd.txt.aes", "temp.txt", master_key)
-
-            with open('temp.txt', 'r') as passwd:
-                print('read_encrypted_file() reading tempt.txt:')
-                print(passwd.read())
-
-            # encrypt file
-            pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
-
-            delete_temp_file()
-        except:
-            print('Error found in read_encrypted_file()')
-
-    # read_encrypted_file(master_key)
