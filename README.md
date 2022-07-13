@@ -69,7 +69,6 @@ This Action Will ERASE All Your Data! Do you want to continue? [Y/N]:
 
 ## TO DO
 
-- Make script run continuously until user kills the program
 - Add option to delete a single credential
 - Add print statement in read_passwd() for when an account is not found
 - Fixed bug in write_passwd() where read_all_accounts() is executed too
