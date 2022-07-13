@@ -14,7 +14,7 @@ git clone https://github.com/borelli28/givepass.git
 
 Navigate to directory where givepass.py is located:
 ```bash
-cd /Home/user/Downloads/givepass-master/
+cd /Home/user/Downloads/givepass/
 ```
 
 Install required libraries from requirements.txt:
