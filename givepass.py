@@ -164,14 +164,18 @@ while True:
                 (key, val, val2) = line.split()
                 accounts[key] = f'{val} {val2}'
 
-        # get credential line from dictionary
-        values = accounts[account]
-        cred = f'{account} {values}'
+        try:
+            # get credential line from dictionary
+            values = accounts[account]
+            cred = f'{account} {values}'
 
-        with open('temp.txt', 'w') as passwd:
-            for line in lines:
-                if line.strip('\n') != cred:
-                    passwd.write(line)
+            with open('temp.txt', 'w') as passwd:
+                for line in lines:
+                    if line.strip('\n') != cred:
+                        passwd.write(line)
+                print(f'{account} removed')
+        except:
+            print('Account you entered does not exist \n')
 
         # encrypt file
         pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
