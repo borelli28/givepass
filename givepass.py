@@ -7,6 +7,7 @@ import sys
 # ask user for master key. Used to Encrypt and decrypt passwd.txt.aes file
 master_key = input('Enter master key: ')
 
+# run the program until user choose to quit
 while True:
 
     # delete temp.txt file since the file is only used while reading and writing to file
