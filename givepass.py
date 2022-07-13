@@ -182,22 +182,21 @@ while master_key:
             print('Error found in remove_cred()')
 
     def hard_reset():
-        # try:
         confirmed = input('This Action Will ERASE All Your Data! Do you want to continue? [Y/N]: ').capitalize()
 
         if confirmed == 'Y':
-            delete_temp_file()
             os.remove('passwd.txt.aes')
             print('Hard reset executed \n')
             quit_program()
         else:
             print('Hard Reset Not Confirmed \n')
-            delete_temp_file()
-        # except:
-        #     print(f'Error found in hard_reset()')
 
     def quit_program():
         print('Quitting... \n')
+        '''
+        Don't call exit() in a try-except block
+        exit() raise an exception named SystemExit which will break your program
+        '''
         sys.exit()
 
     # Read entire passwd.txt.aes document. Used for debugging
