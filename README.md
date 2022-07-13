@@ -73,4 +73,5 @@ This Action Will ERASE All Your Data! Do you want to continue? [Y/N]:
 ## TO DO
 
 - Add log in read_passwd() & read_all_accounts() for when an account is not found
+- Fixed bug where options are displayed after entering wrong master key
 - Add test cases
