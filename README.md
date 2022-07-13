@@ -40,8 +40,8 @@ Run script
 # This key will be used to encrypt and decrypt(Symmetric) the passwd.txt.aes file where all your credentials are stored
 Enter master key:
 
-# You have four options:
-(R)Read Credentials - (W)Write Credentials - (D)Display All Accounts - (!)Hard Reset:
+# You have five options:
+(R)Read Credentials - (W)Write Credentials - (D)Display All Accounts - (Q)Quit (!)Hard Reset:
 
 # Read Credentials: Ask you for an account name(Ex: twitter, google, etc.) and it will output the username & password for that account
 Enter account name:
