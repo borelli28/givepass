@@ -48,9 +48,6 @@ while master_key:
     except:
         print('Error found while checking if passwd.txt.aes file exist')
 
-    # Options presented to user
-    options = input('(R)Read Credentials - (W)Write Credentials - (A)Display All Accounts - (D)Remove a Credential - (Q)Quit - (!)Hard Reset: ').capitalize()
-
     def check_input_valid(input):
         try:
             if type(input) == str and len(input) > 0:
@@ -217,6 +214,9 @@ while master_key:
     #     except:
     #         print('Error found in read_encrypted_file()')
     # read_encrypted_file(master_key)
+
+    # Options presented to user
+    options = input('(R)Read Credentials - (W)Write Credentials - (A)Display All Accounts - (D)Remove a Credential - (Q)Quit - (!)Hard Reset: \n').capitalize()
 
     # if passwd file does not exist, create one
     try:
