@@ -48,7 +48,7 @@ while True:
         print('Error found while checking if passwd.txt.aes file exist')
 
     # Options presented to user
-    options = input('(R)Read Credentials - (W)Write Credentials - (A)Display All Accounts - (D)Remove a credential - (Q)Quit - (!)Hard Reset: ').capitalize()
+    options = input('(R)Read Credentials - (W)Write Credentials - (A)Display All Accounts - (D)Remove a Credential - (Q)Quit - (!)Hard Reset: ').capitalize()
 
     def check_input_valid(input):
         try:
@@ -222,7 +222,7 @@ while True:
         read_all_accounts(master_key)
 
     elif options == 'D':
-        account = input('Enter the account that you want to delete: ')
+        account = input('Enter the account that you want to remove: ')
 
         remove_cred(account)
 
