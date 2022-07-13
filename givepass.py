@@ -55,7 +55,7 @@ while True:
             if type(input) == str and len(input) > 0:
                 return True
             else:
-                print('Invalid Input')
+                print('Invalid Input \n')
                 delete_temp_file()
         except:
             print('Error found in check_input_valid')
@@ -126,7 +126,7 @@ while True:
             with open('temp.txt', 'r') as passwd:
                 for line in passwd:
                    (key, val1, val2) = line.split()
-                   passwords[key] = f'USERNAME: {val1}  PASSWORD: {val2}'
+                   passwords[key] = f'USERNAME: {val1}  PASSWORD: {val2} \n'
 
             # encrypt file
             pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
@@ -135,7 +135,7 @@ while True:
             print('All Your Accounts:')
             for key in passwords.keys():
                 if key != None:
-                    print(key)
+                    print(f'- {key} \n')
 
         except:
             print('Error found in read_all_accounts()')
@@ -146,10 +146,10 @@ while True:
 
             if confirmed == 'Y':
                 os.remove('passwd.txt.aes')
-                print('Hard reset executed')
+                print('Hard reset executed \n')
                 delete_temp_file()
             else:
-                print('Hard Reset Not Confirmed')
+                print('Hard Reset Not Confirmed \n')
                 delete_temp_file()
         except:
             print('Error found in hard_reset()')
@@ -157,9 +157,8 @@ while True:
     # if passwd file does not exist, create one
     try:
         with open('passwd.txt.aes', 'r') as passwd:
-            print('passwd.txt.aes file found')
+            print('\n')
     except:
-        print('creating passwd file')
         create_file(master_key)
 
     # read file
@@ -177,20 +176,20 @@ while True:
         password = input('Enter password: ')
 
         write_passwd(master_key, account, username, password)
-        print('Account saved')
+        print('New account saved \n')
 
     elif options == 'D':
         read_all_accounts(master_key)
 
     elif options == 'Q':
-        print('Quitting program...')
+        print('Quitting program... \n')
         sys.exit()
 
     elif options == '!':
         hard_reset()
 
     else:
-        print('You entered a invalid option')
+        print('You entered a invalid option \n')
 
     # Read entire passwd.txt.aes document. Used for debugging
     def read_encrypted_file(key):
