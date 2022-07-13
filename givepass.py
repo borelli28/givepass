@@ -48,7 +48,7 @@ while True:
         print('Error found while checking if passwd.txt.aes file exist')
 
     # Options presented to user
-    options = input('(R)Read Credentials - (W)Write Credentials - (D)Display All Accounts - (!)Hard Reset: ').capitalize()
+    options = input('(R)Read Credentials - (W)Write Credentials - (D)Display All Accounts - (Q)Quit - (!)Hard Reset: ').capitalize()
 
     def check_input_valid(input):
         try:
@@ -182,6 +182,10 @@ while True:
     elif options == 'D':
         read_all_accounts(master_key)
 
+    elif options == 'Q':
+        print('Quitting program...')
+        sys.exit()
+
     elif options == '!':
         hard_reset()
 
@@ -207,7 +211,3 @@ while True:
             print('Error found in read_encrypted_file()')
 
     # read_encrypted_file(master_key)
-
-    def quit():
-        print('Quitting program...')
-        sys.exit()
