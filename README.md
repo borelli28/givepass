@@ -72,5 +72,5 @@ This Action Will ERASE All Your Data! Do you want to continue? [Y/N]:
 
 ## TO DO
 
-- Add print statement in read_passwd() for when an account is not found
+- Add log in read_passwd() & read_all_accounts() for when an account is not found
 - Add test cases
