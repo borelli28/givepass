@@ -48,7 +48,7 @@ while True:
         print('Error found while checking if passwd.txt.aes file exist')
 
     # Options presented to user
-    options = input('(R)Read Credentials - (W)Write Credentials - (D)Display All Accounts - (Q)Quit - (!)Hard Reset: ').capitalize()
+    options = input('(R)Read Credentials - (W)Write Credentials - (A)Display All Accounts - (D)Remove a credential - (Q)Quit - (!)Hard Reset: ').capitalize()
 
     def check_input_valid(input):
         try:
@@ -146,6 +146,27 @@ while True:
         except:
             print('Error found in read_all_accounts()')
 
+    # delete a single credential
+    def remove_cred(account):
+
+        # decrypt file
+        pyAesCrypt.decryptFile("passwd.txt.aes", "temp.txt", master_key)
+
+        # create dictionary of accounts
+        accounts = {}
+        with open('temp.txt', 'r') as passwd:
+            for line in passwd:
+               (key, val1, val2) = line.split()
+               accounts[key] = f'USERNAME: {val1}  PASSWORD: {val2} \n'
+
+        # find the account and delete from the dictionary
+        del accounts[account]
+        print('credential removed \n')
+
+        # encrypt file
+        pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
+        delete_temp_file()
+
     def hard_reset():
         try:
             confirmed = input('This Action Will ERASE All Your Data! Do you want to continue? [Y/N]: ').capitalize()
@@ -183,8 +204,12 @@ while True:
 
         write_passwd(master_key, account, username, password)
 
-    elif options == 'D':
+    elif options == 'A':
         read_all_accounts(master_key)
+
+    elif options == 'D':
+        account = input('Enter the account that you want to delete: ')
+        remove_cred(account)
 
     elif options == 'Q':
         print('Quitting program... \n')
