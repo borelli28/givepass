@@ -69,6 +69,5 @@ This Action Will ERASE All Your Data! Do you want to continue? [Y/N]:
 
 ## TO DO
 
-- Add option to delete a single credential
 - Add print statement in read_passwd() for when an account is not found
 - Add test cases
