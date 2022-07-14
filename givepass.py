@@ -12,6 +12,9 @@ while True:
     def encrypt_passwd():
         pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
 
+    def decrypt_passwd():
+        pyAesCrypt.decryptFile("passwd.txt.aes", "temp.txt", master_key)
+
     # delete temp.txt file since the file is only used while reading and writing to file
     def delete_temp_file():
         try:
