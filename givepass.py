@@ -9,6 +9,9 @@ while True:
     # ask user for master key. Used to Encrypt and decrypt passwd.txt.aes file
     master_key = input('Enter master key: ')
 
+    def encrypt_passwd():
+        pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
+
     # delete temp.txt file since the file is only used while reading and writing to file
     def delete_temp_file():
         try:
