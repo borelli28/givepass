@@ -28,7 +28,7 @@ while True:
         except:
             print('Error found in create_file()')
 
-    def check_master_key():
+    def key_correct():
         try:
             pyAesCrypt.decryptFile("passwd.txt.aes", "temp.txt", master_key)
             pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
@@ -254,13 +254,13 @@ while True:
     # read_encrypted_file(master_key)
 
     # Check that master key is correct and then show options prompt
-    if check_master_key():
+    if key_correct():
         if passwd_exist():
             show_options()
         else:
             create_file()
     # If this gets executed it means that the user is creating a new DB(passwd file)
-    elif not check_master_key() and not passwd_exist():
+    elif not key_correct() and not passwd_exist():
         create_file()
         if passwd_exist():
             show_options()
