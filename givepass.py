@@ -159,14 +159,13 @@ while True:
                 # get credential line from dictionary
                 values = accounts[account]
                 cred = f'{account} {values}'
-
                 with open('temp.txt', 'w') as passwd:
                     for line in lines:
                         if line.strip('\n') != cred:
                             passwd.write(line)
                     print(f'{account} removed')
             except:
-                print('Account you entered does not exist \n')
+                print('Account you entered not found \n')
 
             encrypt_passwd()
             delete_temp_file()
