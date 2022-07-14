@@ -27,8 +27,7 @@ while True:
     def create_file():
         try:
             with open('temp.txt', 'a') as passwd:
-                # encrypt file
-                pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
+                encrypt_passwd()
 
                 delete_temp_file()
         except:
@@ -36,8 +35,8 @@ while True:
 
     def key_correct():
         try:
-            pyAesCrypt.decryptFile("passwd.txt.aes", "temp.txt", master_key)
-            pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
+            decrypt_passwd()
+            encrypt_passwd()
             delete_temp_file()
             return True
         except:
@@ -68,8 +67,7 @@ while True:
             passwords = {}
 
             check_input_valid(account)
-            # decrypt file
-            pyAesCrypt.decryptFile("passwd.txt.aes", "temp.txt", master_key)
+            decrypt_passwd()
 
             # convert passwd.txt data into a dictionary
             with open('temp.txt', 'r') as passwd:
@@ -77,8 +75,7 @@ while True:
                    (key, val1, val2) = line.split()
                    passwords[key] = f'USERNAME: {val1}  PASSWORD: {val2}'
 
-            # encrypt file
-            pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
+            encrypt_passwd()
             delete_temp_file()
 
             # look for the account password in passwd file data
@@ -94,8 +91,7 @@ while True:
             check_input_valid(username)
             check_input_valid(password)
 
-            # decrypt file
-            pyAesCrypt.decryptFile("passwd.txt.aes", "temp.txt", master_key)
+            decrypt_passwd()
 
             # check that account does we don't have an account with the same name already
             accounts = {}
@@ -113,8 +109,7 @@ while True:
                     passwd.writelines(f'{account} {username} {password}\n')
                     print('New account saved \n')
 
-            # encrypt file
-            pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
+            encrypt_passwd()
             delete_temp_file()
 
         except:
@@ -124,8 +119,7 @@ while True:
         try:
             passwords = {}
 
-            # decrypt file
-            pyAesCrypt.decryptFile("passwd.txt.aes", "temp.txt", master_key)
+            decrypt_passwd()
 
             # convert passwd.txt.aes data into a dictionary
             with open('temp.txt', 'r') as passwd:
@@ -133,8 +127,7 @@ while True:
                    (key, val1, val2) = line.split()
                    passwords[key] = f'USERNAME: {val1}  PASSWORD: {val2} \n'
 
-            # encrypt file
-            pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
+            encrypt_passwd()
             delete_temp_file()
 
             print('All Your Accounts:')
@@ -148,8 +141,7 @@ while True:
     # remove a single credential
     def remove_cred(account):
         try:
-            # decrypt file
-            pyAesCrypt.decryptFile("passwd.txt.aes", "temp.txt", master_key)
+            decrypt_passwd()
 
             # iterate through the file until you find the account
             lines = None
@@ -176,8 +168,7 @@ while True:
             except:
                 print('Account you entered does not exist \n')
 
-            # encrypt file
-            pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
+            encrypt_passwd()
             delete_temp_file()
         except:
             print('Error found in remove_cred()')
