@@ -3,13 +3,11 @@ import pyAesCrypt
 import os
 import sys
 
-
-# ask user for master key. Used to Encrypt and decrypt passwd.txt.aes file
-master_key = input('Enter master key: ')
-
 # run the program until user choose to quit
-while master_key:
-    print(f'Master Key: {master_key}')
+while True:
+
+    # ask user for master key. Used to Encrypt and decrypt passwd.txt.aes file
+    master_key = input('Enter master key: ')
 
     # delete temp.txt file since the file is only used while reading and writing to file
     def delete_temp_file():
@@ -20,7 +18,7 @@ while master_key:
         except:
             print('Error found in delete_temp_file()')
 
-    def create_file(key):
+    def create_file():
         try:
             with open('temp.txt', 'a') as passwd:
                 # encrypt file
@@ -30,23 +28,23 @@ while master_key:
         except:
             print('Error found in create_file()')
 
-    def check_master_key(key):
+    def check_master_key():
         try:
             pyAesCrypt.decryptFile("passwd.txt.aes", "temp.txt", master_key)
             pyAesCrypt.encryptFile("temp.txt", "passwd.txt.aes", master_key)
             delete_temp_file()
+            return True
         except:
-            print('WRONG! Try again bozo')
             delete_temp_file()
 
-    # checks if passwd.txt.aes file exist, else we need to create a new one
-    try:
-        if os.path.exists('passwd.txt.aes'):
-            check_master_key(master_key)
-        else:
-            create_file(master_key)
-    except:
-        print('Error found while checking if passwd.txt.aes file exist')
+    def passwd_exist():
+        try:
+            if os.path.exists('passwd.txt.aes'):
+                return True
+            else:
+                return False
+        except:
+            print('Error found in check_passwd()')
 
     def check_input_valid(input):
         try:
@@ -59,7 +57,7 @@ while master_key:
             print('Error found in check_input_valid')
             delete_temp_file()
 
-    def read_passwd(key, account):
+    def read_passwd(account):
         try:
             passwords = {}
 
@@ -83,7 +81,7 @@ while master_key:
         except:
             print('Error found in read_passwd()')
 
-    def write_passwd(key, account, username, password):
+    def write_passwd(account, username, password):
         try:
             duplicate = False
             check_input_valid(account)
@@ -116,7 +114,7 @@ while master_key:
         except:
             print('Error found in write_passwd()')
 
-    def read_all_accounts(key):
+    def read_all_accounts():
         try:
             passwords = {}
 
@@ -134,9 +132,9 @@ while master_key:
             delete_temp_file()
 
             print('All Your Accounts:')
-            for key in passwords.keys():
-                if key != None:
-                    print(f'- {key} \n')
+            for i in passwords.keys():
+                if i != None:
+                    print(f'- {i} \n')
 
         except:
             print('Error found in read_all_accounts()')
@@ -186,7 +184,7 @@ while master_key:
             print('Hard reset executed \n')
             quit_program()
         else:
-            print('Hard Reset Not Confirmed \n')
+            print('Hard Reset Aborted \n')
 
     def quit_program():
         print('Quitting... \n')
@@ -195,6 +193,46 @@ while master_key:
         exit() raise an exception named SystemExit which will break your program
         '''
         sys.exit()
+
+    # Options presented to user
+    def show_options():
+        options = input('(R)Read Credentials - (W)Write Credentials - (A)Display All Accounts - (D)Remove a Credential - (Q)Quit - (!)Hard Reset: ').capitalize()
+        print('\n')
+
+        # read file
+        if options == 'R':
+            account = input('Enter account name: ')
+            print(read_passwd(account))
+            show_options()
+
+        # write(append) to file
+        elif options == 'W':
+            account = input('Enter account name: ')
+            username = input('Enter username or email for account: ')
+            password = input('Enter password: ')
+            write_passwd(account, username, password)
+            show_options()
+
+        elif options == 'A':
+            read_all_accounts()
+            show_options()
+
+        elif options == 'D':
+            account = input('Enter the account that you want to remove: ')
+            remove_cred(account)
+            show_options()
+
+        elif options == 'Q':
+            quit_program()
+
+        elif options == '!':
+            hard_reset()
+            # Executed if hard reset is aborted
+            show_options()
+
+        else:
+            print('You entered a invalid option \n')
+            show_options()
 
     # Read entire passwd.txt.aes document. Used for debugging
     # def read_encrypted_file(key):
@@ -215,45 +253,14 @@ while master_key:
     #         print('Error found in read_encrypted_file()')
     # read_encrypted_file(master_key)
 
-    # Options presented to user
-    options = input('(R)Read Credentials - (W)Write Credentials - (A)Display All Accounts - (D)Remove a Credential - (Q)Quit - (!)Hard Reset: \n').capitalize()
-
-    # if passwd file does not exist, create one
-    try:
-        with open('passwd.txt.aes', 'r') as passwd:
-            print('\n')
-    except:
-        create_file(master_key)
-
-    # read file
-    if options == 'R':
-        account = input('Enter account name: ')
-
-        print(read_passwd(master_key, account))
-
-    # write(append) to file
-    elif options == 'W':
-        account = input('Enter account name: ')
-
-        username = input('Enter username or email for account: ')
-
-        password = input('Enter password: ')
-
-        write_passwd(master_key, account, username, password)
-
-    elif options == 'A':
-        read_all_accounts(master_key)
-
-    elif options == 'D':
-        account = input('Enter the account that you want to remove: ')
-
-        remove_cred(account)
-
-    elif options == 'Q':
-        quit_program()
-
-    elif options == '!':
-        hard_reset()
-
-    else:
-        print('You entered a invalid option \n')
+    # Check that master key is correct and then show options prompt
+    if check_master_key():
+        if passwd_exist():
+            show_options()
+        else:
+            create_file()
+    # If this gets executed it means that the user is creating a new DB(passwd file)
+    elif not check_master_key() and not passwd_exist():
+        create_file()
+        if passwd_exist():
+            show_options()
